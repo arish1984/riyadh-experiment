@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIYADH_NODE: Business Tools</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .calc-container { background: rgba(0, 20, 0, 0.9); border: 1px solid #00ff41; padding: 20px; margin: 20px auto; max-width: 600px; text-align: left; }
+        input { background: #000; border: 1px solid #00ff41; color: #00ff41; padding: 10px; width: 100%; margin: 10px 0; }
+        .result-box { margin-top: 20px; border-top: 1px dashed #00ff41; padding-top: 10px; color: #ff00ff; }
+    </style>
+</head>
+<body class="tools-page">
+    <main>
+        <h1>BUSINESS_VAULT</h1>
+        
+        <div class="calc-container">
+            <h3>Battery Import Calculator (CN to RUH)</h3>
+            <input type="number" id="fobPrice" placeholder="Total Order Value (CNY/USD)">
+            <input type="number" id="shipping" placeholder="Shipping & Brokering Charges">
+            <input type="number" id="customs" placeholder="Customs Duty %">
+            <button onclick="calcBattery()">RUN ANALYSIS</button>
+            <div id="batteryResult" class="result-box"></div>
+        </div>
+
+        <div class="calc-container">
+            <h3>Commission Engine (January 2026)</h3>
+            <input type="number" id="salesAmount" placeholder="Total Sales for Salesperson">
+            <input type="number" id="rate" placeholder="Commission Rate %">
+            <button onclick="calcComm()">CALCULATE PAYOUT</button>
+            <div id="commResult" class="result-box"></div>
+        </div>
+        
+        <button onclick="window.location.href='index.html'">BACK TO TERMINAL</button>
+    </main>
+
+    <script>
+        function calcBattery() {
+            const price = parseFloat(document.getElementById('fobPrice').value) || 0;
+            const ship = parseFloat(document.getElementById('shipping').value) || 0;
+            const duty = parseFloat(document.getElementById('customs').value) || 0;
+            const total = price + ship + (price * (duty/100));
+            document.getElementById('batteryResult').innerHTML = `TOTAL LANDED COST: ${total.toFixed(2)} SAR`;
+        }
+
+        function calcComm() {
+            const sales = parseFloat(document.getElementById('salesAmount').value) || 0;
+            const rate = parseFloat(document.getElementById('rate').value) || 0;
+            const payout = sales * (rate/100);
+            document.getElementById('commResult').innerHTML = `COMMISSION DUE: ${payout.toFixed(2)} SAR`;
+        }
+    </script>
+</body>
+</html>
